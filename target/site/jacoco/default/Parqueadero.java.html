@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Parqueadero.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">parqueadero</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Parqueadero.java</span></div><h1>Parqueadero.java</h1><pre class="source lang-java linenums">import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Esta clase representa un parqueadero con TAMANO puestos.
+ */
+public class Parqueadero {
+// -----------------------------------------------------------------
+    // Constantes
+    // -----------------------------------------------------------------
+
+    /**
+     * Indica el n�mero de puestos en el parqueadero.
+     */
+    public static final int TAMANO = 40;
+
+    /**
+     * Es el c�digo de error para cuando el parqueadero est� lleno.
+     */
+    public static final int NO_HAY_PUESTO = -1;
+
+    /**
+     * Es el c�digo de error para cuando el parqueadero est� cerrado.
+     */
+    public static final int PARQUEADERO_CERRADO = -2;
+
+    /**
+     * Es el c�digo de error para cuando el carro que se busca no est� dentro del parqueadero.
+     */
+    public static final int CARRO_NO_EXISTE = -3;
+
+    /**
+     * Es el c�digo de error para cuando ya hay un carro en el parqueadero con la placa de un nuevo carro que va a entrar.
+     */
+    public static final int CARRO_YA_EXISTE = -4;
+
+    /**
+     * Es la hora a la que se abre el parqueadero.
+     */
+    public static final int HORA_INICIAL = 6;
+
+    /**
+     * Es la hora a la que se cierra el parqueadero.
+     */
+    public static final int HORA_CIERRE = 21;
+
+    /**
+     * Es la tarifa inicial del parqueadero.
+     */
+    public static final int TARIFA_INICIAL = 1200;
+
+    // -----------------------------------------------------------------
+    // Atributos
+    // -----------------------------------------------------------------
+
+    /**
+     * Contenedora de tama�o fijo de puestos.
+     */
+    private Puesto puestos[];
+
+    /**
+     * Tarifa por hora en el parqueadero.
+     */
+    private int tarifa;
+
+    /**
+     * Valor recibido en la caja del parqueadero.
+     */
+    private int caja;
+
+    /**
+     * Hora actual en el parqueadero.
+     */
+    private int horaActual;
+
+    /**
+     * Indica si el parqueadero esta abierto.
+     */
+    private boolean abierto;
+
+
+
+    // -----------------------------------------------------------------
+    // Constructores
+    // -----------------------------------------------------------------
+
+    /**
+     * Crea un parqueadero con su informacion basica. &lt;br&gt;
+     * &lt;b&gt;post: &lt;/b&gt; Se crea un parqueadero abierto con la tarifa establecida y el arreglo de puestos esta creado.
+     */
+    public Parqueadero( )
+<span class="fc" id="L92">    {</span>
+<span class="fc" id="L93">        horaActual = HORA_INICIAL;</span>
+<span class="fc" id="L94">        abierto = true;</span>
+<span class="fc" id="L95">        tarifa = TARIFA_INICIAL;</span>
+<span class="fc" id="L96">        caja = 0;</span>
+        // Crea el arreglo de puestos e inicializa cada uno de ellos
+<span class="fc" id="L98">        puestos = new Puesto[TAMANO];</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        for( int i = 0; i &lt; TAMANO; i++ )</span>
+<span class="fc" id="L100">            puestos[ i ] = new Puesto(i );</span>
+
+<span class="fc" id="L102">    }</span>
+
+    // -----------------------------------------------------------------
+    // Metodos
+    // -----------------------------------------------------------------
+
+    /**
+     * Retorna un mensaje con la placa del carro que se encuentra en la posici�n indicada.
+     * @param pPosicion Posici�n del carro.
+     * @return Mensaje con la placa. Si no hay un carro en dicha posici�n retorna un mensaje indicando que no hay un carro en esa posici�n.
+     */
+    public String darPlacaCarro(int pPosicion )
+    {
+<span class="fc" id="L115">        String respuesta = &quot;&quot;;</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        if( estaOcupado(pPosicion ) )</span>
+        {
+<span class="fc" id="L118">            respuesta = &quot;Placa: &quot; + puestos[ pPosicion ].darCarro( ).darPlaca( );</span>
+        }
+        else
+        {
+<span class="fc" id="L122">            respuesta = &quot;No hay un carro en esta posicion&quot;;</span>
+        }
+
+<span class="fc" id="L125">        return respuesta;</span>
+    }
+
+    /**
+     * Ingresa un un carro al parqueadero. &lt;br&gt;
+     * &lt;b&gt;pre: &lt;/b&gt; El arreglo de puestos no est� vac�o. &lt;br&gt;
+     * &lt;b&gt;post: &lt;/b&gt;El carro qued� parqueado en el puesto indicado.
+     * @param pPlaca Placa del carro que ingresa. pPlaca != null.
+     * @return Puesto en el que debe parquear. &lt;br&gt;
+     *         Si el parqueadero est� lleno retorna el valor NO_HAY_PUESTO. &lt;br&gt;
+     *         Si el parqueadero est� cerrado retorna el valor PARQUEADERO_CERRADO.
+     */
+    public int entrarCarro(String pPlaca)
+    {
+<span class="fc" id="L139">        int resultado = 0;</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">        if( !abierto )</span>
+        {
+<span class="fc" id="L142">            resultado = PARQUEADERO_CERRADO;</span>
+        }
+        else
+        {
+            // Buscar en el parqueadero un carro con la placa indicada
+<span class="fc" id="L147">            int numPuestoCarro = buscarPuestoCarro(pPlaca.toUpperCase( ));</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">            if(numPuestoCarro != CARRO_NO_EXISTE)</span>
+            {
+<span class="fc" id="L150">                resultado = CARRO_YA_EXISTE;</span>
+            }
+            // Buscar un puesto libre para el carro y agregarlo
+<span class="fc" id="L153">            resultado = buscarPuestoLibre( ); //encuentra posicion vacia</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">            if(resultado != NO_HAY_PUESTO )</span>
+            {
+<span class="fc" id="L156">                Carro carroEntrando = new Carro( pPlaca, horaActual );</span>
+<span class="fc" id="L157">                puestos[resultado].parquearCarro( carroEntrando );</span>
+            }
+        }
+<span class="fc" id="L160">        return resultado;</span>
+    }
+
+    /**
+     * Sirve para sacar un carro del parqueadero y saber la cantidad de dinero que debe pagar. &lt;br&gt;
+     * &lt;b&gt;pre: &lt;/b&gt; El arreglo de puestos no est� vac�o. &lt;br&gt;
+     * &lt;b&gt;post: &lt;/b&gt; El carro sali� del parqueadero y el puesto que ocupaba, ahora est� libre.
+     * @param pPlaca Placa del carro que va a salir. pPlaca != null.
+     * @return Retorna el valor a pagar. Si el carro no se encontraba dentro del parqueadero entonces retorna CARRO_NO_EXISTE. &lt;br&gt;
+     *         Si el parqueadero ya estaba cerrado retorna PARQUEADERO_CERRADO.
+     */
+    public int sacarCarro( String pPlaca)
+    {
+<span class="fc" id="L173">        int resultado = 0;</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        if( !abierto )</span>
+        {
+<span class="fc" id="L176">            resultado = PARQUEADERO_CERRADO;</span>
+        }else
+        {
+<span class="fc" id="L179">            int numPuesto = buscarPuestoCarro( pPlaca.toUpperCase( ) );</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">            if( numPuesto == CARRO_NO_EXISTE )</span>
+            {
+<span class="fc" id="L182">                resultado = CARRO_NO_EXISTE;</span>
+            }
+            else
+            {
+<span class="fc" id="L186">                Carro carro = puestos[ numPuesto ].darCarro( );</span>
+<span class="fc" id="L187">                int nHoras = carro.darTiempoEnParqueadero( horaActual );</span>
+
+<span class="fc" id="L189">                int porPagar = nHoras * tarifa;</span>
+<span class="fc" id="L190">                caja = caja + porPagar;</span>
+<span class="fc" id="L191">                puestos[ numPuesto ].sacarCarro( );</span>
+<span class="fc" id="L192">                resultado = porPagar;</span>
+            }
+        }
+<span class="fc" id="L195">        return resultado;</span>
+    }
+
+    /**
+     * Indica la cantidad de dinero que hay en la caja.
+     * @return Los ingresos totales en la caja.
+     */
+    public int darMontoCaja( )
+    {
+<span class="fc" id="L204">        return caja;</span>
+    }
+
+    /**
+     * Indica la cantidad de puestos libres que hay.
+     * @return El n�mero de espacios vac�os en el parqueadero.
+     */
+    public int calcularPuestosLibres( )
+    {
+<span class="fc" id="L213">        int puestosLibres = 0;</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">        for( Puesto puesto : puestos )</span>
+        {
+<span class="fc bfc" id="L216" title="All 2 branches covered.">            if( !puesto.estaOcupado( ) )</span>
+            {
+<span class="fc" id="L218">                puestosLibres = puestosLibres + 1;</span>
+            }
+        }
+<span class="fc" id="L221">        return puestosLibres;</span>
+    }
+
+    /**
+     * Cambia la tarifa actual del parqueadero.
+     * @param pTarifa Tarifa nueva del parqueadero.
+     */
+    public void cambiarTarifa( int pTarifa )
+    {
+
+<span class="fc" id="L231">        tarifa = pTarifa;</span>
+<span class="fc" id="L232">    }</span>
+
+
+    /**
+     * Busca un puesto libre en el parqueadero y lo retorna. Si no encuentra retorna el valor NO_HAY_PUESTO.
+     * @return N�mero del puesto libre encontrado.
+     */
+    private int buscarPuestoLibre( )
+    {
+<span class="fc" id="L241">        int puesto = NO_HAY_PUESTO;</span>
+<span class="fc bfc" id="L242" title="All 4 branches covered.">        for( int i = 0; i &lt; TAMANO &amp;&amp; puesto == NO_HAY_PUESTO; i++ )</span>
+        {
+<span class="fc bfc" id="L244" title="All 2 branches covered.">            if( !puestos[ i ].estaOcupado( ) )</span>
+            {
+<span class="fc" id="L246">                puesto = i;</span>
+            }
+        }
+<span class="fc" id="L249">        return puesto;</span>
+    }
+
+    /**
+     * Indica el n�mero de puesto en el que se encuentra el carro con una placa dada. Si no lo encuentra retorna el valor CARRO_NO_EXISTE.
+     * @param pPlaca Placa del carro que se busca. pPlaca != null.
+     * @return N�mero del puesto en el que se encuentra el carro.
+     */
+    private int buscarPuestoCarro( String pPlaca )
+    {
+<span class="fc" id="L259">        int puesto = CARRO_NO_EXISTE;</span>
+<span class="fc bfc" id="L260" title="All 4 branches covered.">        for( int i = 0; i &lt; TAMANO &amp;&amp; puesto == CARRO_NO_EXISTE; i++ )</span>
+        {
+<span class="fc bfc" id="L262" title="All 2 branches covered.">            if( puestos[i].tieneCarroConPlaca( pPlaca ) )</span>
+            {
+<span class="fc" id="L264">                puesto = i;</span>
+            }
+        }
+<span class="fc" id="L267">        return puesto;</span>
+    }
+
+    /**
+     * Avanza una hora en el parqueadero. Si la hora actual es igual a la hora de cierre, el parqueadero se cierra.
+     */
+    public void avanzarHora( )
+    {
+<span class="pc bpc" id="L275" title="1 of 2 branches missed.">        if( horaActual &lt;= HORA_CIERRE )</span>
+        {
+<span class="fc" id="L277">            horaActual = ( horaActual + 1 );</span>
+        }
+<span class="fc bfc" id="L279" title="All 2 branches covered.">        if( horaActual == HORA_CIERRE )</span>
+        {
+<span class="fc" id="L281">            abierto = false;</span>
+        }
+<span class="fc" id="L283">    }</span>
+
+    /**
+     * Retorna la hora actual.
+     * @return La hora actual en el parqueadero.
+     */
+    public int darHoraActual( )
+    {
+<span class="fc" id="L291">        return horaActual;</span>
+    }
+
+    /**
+     * Indica si el parqueadero est� abierto.
+     * @return Retorna true si el parqueadero est� abierto. False en caso contrario.
+     */
+    public boolean estaAbierto( )
+    {
+<span class="fc" id="L300">        return abierto;</span>
+    }
+
+    /**
+     * Retorna la tarifa por hora del parqueadero.
+     * @return La tarifa que se est� aplicando en el parqueadero.
+     */
+    public int darTarifa( )
+    {
+<span class="fc" id="L309">        return tarifa;</span>
+    }
+
+    /**
+     * Indica si un puesto est� ocupado.
+     * @param pPuesto El puesto que se quiere saber si est� ocupado. pPuesto &gt;= 0 &amp;&amp; pPuesto &lt; puestos.length.
+     * @return Retorna true si el puesto est� ocupado. False en caso contrario.
+     */
+    public boolean estaOcupado( int pPuesto )
+    {
+<span class="fc" id="L319">        boolean ocupado = puestos[ pPuesto ].estaOcupado( );</span>
+<span class="fc" id="L320">        return ocupado;</span>
+    }
+
+    // -----------------------------------------------------------------
+    // Puntos de Extensi�n
+    // -----------------------------------------------------------------
+
+    /**
+     * M�todo de extensi�n 1.
+     * @return Respuesta 1.
+     */
+    public String metodo1( )
+    {
+<span class="fc" id="L333">        String carro24 = &quot;Si&quot;;</span>
+<span class="pc bpc" id="L334" title="1 of 2 branches missed.">        if(hayCarroMas24Horas()==true){</span>
+<span class="nc" id="L335">            carro24 = &quot;Si&quot;;</span>
+        }else{
+<span class="fc" id="L337">            carro24 = &quot;No&quot;;</span>
+        }
+<span class="fc" id="L339">        return &quot;Cantidad de carros con placa PB:&quot; +contarCarrosQueComienzanConPlacaPB()+ &quot;- Hay carro parqueado por 24 o más horas: &quot;+carro24;</span>
+    }
+
+    /**
+     * M�todo de extensi�n 2.
+     * @return Respuesta 2.
+     */
+    public String metodo2( )
+    {
+<span class="fc" id="L348">        int contador = 0;</span>
+<span class="fc bfc" id="L349" title="All 2 branches covered.">        for(Puesto puesto: puestos){</span>
+<span class="fc" id="L350">            Carro carro = puesto.darCarro();</span>
+<span class="fc bfc" id="L351" title="All 2 branches covered.">            if(carro!=null){</span>
+<span class="fc" id="L352">                contador+=1;</span>
+            }
+        }
+<span class="fc" id="L355">        return (&quot;Cantidad de carros sacados: &quot;+String.valueOf(contador));</span>
+    }
+
+    /**
+     * Calcula el tiempo promedio de parqueo de todos los carros que se han parqueado
+     * @return Retorna el promedio.
+     */
+
+    public double calcularTiempoPromedioParqueado() {
+<span class="fc" id="L364">        int totalTiempoParqueado = 0;</span>
+<span class="fc" id="L365">        int totalCarros = 0;</span>
+
+<span class="fc bfc" id="L367" title="All 2 branches covered.">        for (Puesto puesto : puestos) {</span>
+<span class="fc" id="L368">            Carro carro = puesto.darCarro();</span>
+<span class="fc bfc" id="L369" title="All 2 branches covered.">            if (carro != null) {</span>
+<span class="fc" id="L370">                int tiempoParqueado = carro.darTiempoEnParqueadero(horaActual);</span>
+<span class="fc" id="L371">                totalTiempoParqueado += tiempoParqueado;</span>
+<span class="fc" id="L372">                totalCarros++;</span>
+            }
+        }
+<span class="fc bfc" id="L375" title="All 2 branches covered.">        if (totalCarros &gt; 0) {</span>
+<span class="fc" id="L376">            double tiempoPromedio = (double) totalTiempoParqueado / totalCarros;</span>
+<span class="fc" id="L377">            return tiempoPromedio;</span>
+        } else {
+<span class="fc" id="L379">            return 0.0;</span>
+        }
+    }
+
+    /**
+     * Imprime una lista con los carros parqueados
+     */
+    public void visualizarCarrosParqueados() {
+<span class="nc" id="L387">        System.out.println(&quot;Carros parqueados -&gt;&quot;);</span>
+
+<span class="nc bnc" id="L389" title="All 2 branches missed.">        for (Puesto puesto : puestos) {</span>
+<span class="nc" id="L390">            Carro carro = puesto.darCarro();</span>
+<span class="nc bnc" id="L391" title="All 2 branches missed.">            if (carro != null) {</span>
+<span class="nc" id="L392">                System.out.println(&quot;Placa: &quot; + carro.darPlaca());</span>
+<span class="nc" id="L393">                System.out.println(&quot;Hora de llegada: &quot; + carro.darHoraLlegada());</span>
+<span class="nc" id="L394">                System.out.println(&quot;--------------------------&quot;);</span>
+            }
+        }
+<span class="nc" id="L397">    }</span>
+
+
+    public Carro hayCarroMasDeOchoHoras() {
+<span class="fc" id="L401">        Carro carroMasDe8Horas = null;</span>
+<span class="fc" id="L402">        int maxHoras = 0;</span>
+<span class="fc bfc" id="L403" title="All 2 branches covered.">        for (Puesto puesto : puestos) {</span>
+<span class="fc" id="L404">            Carro carro = puesto.darCarro();</span>
+<span class="fc bfc" id="L405" title="All 2 branches covered.">            if (carro != null) {</span>
+<span class="fc" id="L406">                int tiempoParqueado = carro.darTiempoEnParqueadero(horaActual);</span>
+<span class="fc bfc" id="L407" title="All 2 branches covered.">                if (tiempoParqueado &gt; 8) {</span>
+<span class="fc" id="L408">                    carroMasDe8Horas = carro;</span>
+<span class="fc" id="L409">                    maxHoras = tiempoParqueado;</span>
+                }
+            }
+        }
+<span class="fc" id="L413">        return carroMasDe8Horas;</span>
+    }
+
+    public boolean hayUnCarroMasDeOchoHoras(){
+<span class="fc" id="L417">        boolean hayCarro = false;</span>
+<span class="fc bfc" id="L418" title="All 2 branches covered.">        for(Puesto puesto: puestos){</span>
+<span class="fc" id="L419">            Carro carro = puesto.darCarro();</span>
+<span class="fc bfc" id="L420" title="All 2 branches covered.">            if(carro != null){</span>
+<span class="fc" id="L421">                int tiempoParqueado = carro.darTiempoEnParqueadero(horaActual);</span>
+<span class="pc bpc" id="L422" title="1 of 2 branches missed.">                if (tiempoParqueado &gt; 8) {</span>
+<span class="fc" id="L423">                    hayCarro = true;</span>
+                }else{
+<span class="nc" id="L425">                    hayCarro = false;</span>
+                }
+            }
+        }
+<span class="fc" id="L429">        return hayCarro;</span>
+    }
+
+
+    /**
+     * @return Devuelve un ArrayList y en el main se itera por cada uno de sus elementos para imprimirlos
+     */
+    public ArrayList&lt;Carro&gt; darCarrosMasDeTresHorasParqueados() {
+<span class="fc" id="L437">        ArrayList&lt;Carro&gt; carrosTresHoras = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L438" title="All 2 branches covered.">        for (Puesto puesto : puestos) {</span>
+<span class="fc" id="L439">            Carro carro = puesto.darCarro();</span>
+<span class="fc bfc" id="L440" title="All 2 branches covered.">            if (carro != null) {</span>
+<span class="fc" id="L441">                int tiempoParqueado = carro.darTiempoEnParqueadero(horaActual);</span>
+<span class="fc bfc" id="L442" title="All 2 branches covered.">                if (tiempoParqueado &gt; 3) {</span>
+<span class="fc" id="L443">                    carrosTresHoras.add(carro);</span>
+                }
+            }
+        }
+<span class="fc" id="L447">        return carrosTresHoras;</span>
+    }
+
+    /**
+     * Toma dos carros adyacentes y compara sus placas para comprobar si existe una duplicada
+     * Empieza con el primer carro y el segundo, avanzando una posiicon en cada uno para recorrerlos a todos
+     * @return True si encuentra un carro con placas gemelas
+     * @return False si no encuentras carros con placas duplicadas despues de validar con NullPointerException
+     */
+    public boolean hayCarrosPlacaIgual() {
+        try {
+<span class="pc bpc" id="L458" title="1 of 2 branches missed.">            for (int i = 0; i &lt; puestos.length - 1; i++) {</span>
+<span class="fc" id="L459">                Carro carro1 = puestos[i].darCarro();</span>
+<span class="pc bpc" id="L460" title="1 of 2 branches missed.">                for (int j = i + 1; j &lt; puestos.length; j++) {</span>
+<span class="fc" id="L461">                    Carro carro2 = puestos[j].darCarro();</span>
+<span class="pc bpc" id="L462" title="1 of 2 branches missed.">                    if (carro1.tienePlaca(carro2.darPlaca())) {</span>
+<span class="nc" id="L463">                        return true; // Se encontró una placa repetida</span>
+                    }
+                }
+            }
+<span class="nc" id="L467">            return false;</span>
+<span class="fc" id="L468">        } catch (NullPointerException e) {</span>
+            // Manejar el NullPointerException aquí
+<span class="fc" id="L470">            return false;</span>
+        }
+    }
+
+    public int contarCarrosQueComienzanConPlacaPB(){
+<span class="fc" id="L475">        int carrosPB = 0;</span>
+<span class="fc bfc" id="L476" title="All 2 branches covered.">        for (Puesto puesto : puestos) {</span>
+<span class="fc" id="L477">            Carro carro = puesto.darCarro();</span>
+<span class="fc bfc" id="L478" title="All 2 branches covered.">            if (carro != null) {</span>
+<span class="fc bfc" id="L479" title="All 2 branches covered.">                if(carro.darPlaca().startsWith(&quot;PB&quot;)){</span>
+<span class="fc" id="L480">                    carrosPB++;</span>
+                }
+            }
+<span class="fc" id="L483">    }return carrosPB;</span>
+
+    }
+    public boolean hayCarroMas24Horas(){
+<span class="fc" id="L487">        boolean hayCarro24 = false;</span>
+<span class="fc bfc" id="L488" title="All 2 branches covered.">        for(Puesto puesto: puestos){</span>
+<span class="fc" id="L489">            Carro carro = puesto.darCarro();</span>
+<span class="fc bfc" id="L490" title="All 2 branches covered.">            if(carro != null){</span>
+<span class="fc" id="L491">                int tiempoParqueado = carro.darTiempoEnParqueadero(horaActual);</span>
+<span class="pc bpc" id="L492" title="1 of 2 branches missed.">                if (tiempoParqueado &gt;= 24) {</span>
+<span class="nc" id="L493">                    hayCarro24 = true;</span>
+                }else{
+<span class="fc" id="L495">                    hayCarro24 = false;</span>
+                }
+            }
+        }
+<span class="fc" id="L499">        return hayCarro24;</span>
+    }
+
+    public void desocuparParqueadero(){
+<span class="fc" id="L503">        int contadorParqueadero = 0;</span>
+<span class="fc bfc" id="L504" title="All 2 branches covered.">        for(Puesto puesto: puestos){</span>
+<span class="fc bfc" id="L505" title="All 2 branches covered.">            if(puesto.estaOcupado()){</span>
+<span class="fc" id="L506">                contadorParqueadero++;</span>
+            }
+        }
+<span class="fc bfc" id="L509" title="All 2 branches covered.">        for (Puesto puesto: puestos){</span>
+<span class="fc" id="L510">            puesto.sacarCarro();</span>
+        }
+<span class="fc" id="L512">        System.out.println(&quot;Carros sacados: &quot;+contadorParqueadero);</span>
+<span class="fc" id="L513">    }</span>
+
+}
+
+
+
+
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

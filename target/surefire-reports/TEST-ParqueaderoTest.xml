@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ParqueaderoTest" time="0.159" tests="44" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/workspaces/Administracion-de-Parqueadero-Java-/target/test-classes:/workspaces/Administracion-de-Parqueadero-Java-/target/classes:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.0/junit-jupiter-params-5.10.0.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/opt/java/11.0.14/lib"/>
+    <property name="sun.java.command" value="/workspaces/Administracion-de-Parqueadero-Java-/target/surefire/surefirebooter-20251130225210371_3.jar /workspaces/Administracion-de-Parqueadero-Java-/target/surefire 2025-11-30T22-52-10_236-jvmRun1 surefire-20251130225210371_1tmp surefire_0-20251130225210371_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/workspaces/Administracion-de-Parqueadero-Java-/target/test-classes:/workspaces/Administracion-de-Parqueadero-Java-/target/classes:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.0/junit-jupiter-params-5.10.0.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/codespace"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-02-08"/>
+    <property name="java.home" value="/opt/java/11.0.14"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/workspaces/Administracion-de-Parqueadero-Java-"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/workspaces/Administracion-de-Parqueadero-Java-/target/surefire/surefirebooter-20251130225210371_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.14.1+1-LTS"/>
+    <property name="user.name" value="codespace"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.8.0-1030-azure"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-31205"/>
+    <property name="localRepository" value="/home/codespace/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="11.0.14.1"/>
+    <property name="user.dir" value="/workspaces/Administracion-de-Parqueadero-Java-"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="11.0.14.1+1-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="55.0"/>
+  </properties>
+  <testcase name="testHayCarrosPlacaIgualDiferentes" classname="ParqueaderoTest" time="0.005"/>
+  <testcase name="testEstaOcupadoConCarro" classname="ParqueaderoTest" time="0.004"/>
+  <testcase name="testTiempoPromedioConCarros" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testMetodo1SinCarro24Horas" classname="ParqueaderoTest" time="0.019"/>
+  <testcase name="testAvanzarHora" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testSacarCarroParqueaderoCerrado" classname="ParqueaderoTest" time="0"/>
+  <testcase name="testHayUnCarroMasDeOchoHorasFalseSinCarros" classname="ParqueaderoTest" time="0"/>
+  <testcase name="testDarPlacaCarroExiste" classname="ParqueaderoTest" time="0.007"/>
+  <testcase name="testCambiarTarifaAfectaPago" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testHayUnCarroMasDeOchoHorasTrue" classname="ParqueaderoTest" time="0"/>
+  <testcase name="testVerificarPlacaPosicion" classname="ParqueaderoTest" time="0.002"/>
+  <testcase name="testConstantes" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testHayCarroMasDeOchoHorasSinCarros" classname="ParqueaderoTest" time="0"/>
+  <testcase name="testCambiarTarifa" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testAvanzarHoraCierraParqueadero" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testHayCarroMasDeOchoHorasExiste" classname="ParqueaderoTest" time="0.002"/>
+  <testcase name="testEntrarCarroParqueaderoCerrado" classname="ParqueaderoTest" time="0"/>
+  <testcase name="testHayCarroMas24HorasSinCarros" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testSacarCarroLiberaPuesto" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testFlujoCompleto" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testSacarCarroExitoso" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testEstaOcupadoVacio" classname="ParqueaderoTest" time="0.003"/>
+  <testcase name="testSacarCarroActualizaCaja" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testSacarCarroNoExiste" classname="ParqueaderoTest" time="0.003"/>
+  <testcase name="testEntrarCarroPrimerPuesto" classname="ParqueaderoTest" time="0.002"/>
+  <testcase name="testHayCarrosPlacaIgualSinCarros" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testCarrosMasDeTresHorasVacio" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testMetodo1" classname="ParqueaderoTest" time="0.006"/>
+  <testcase name="testMetodo2" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testMetodo2SinCarros" classname="ParqueaderoTest" time="0.003"/>
+  <testcase name="testMultiplesCarrosPB" classname="ParqueaderoTest" time="0.002"/>
+  <testcase name="testEntrarCarroExitoso" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testCalcularPuestosLibresConCarros" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testHayCarroMasDeOchoHorasNinguno" classname="ParqueaderoTest" time="0.003"/>
+  <testcase name="testContarCarrosPBSinCarros" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testDesocuparParqueadero" classname="ParqueaderoTest" time="0.008">
+    <system-out><![CDATA[Carros sacados: 3
+]]></system-out>
+  </testcase>
+  <testcase name="testCarrosMasDeTresHorasConCarros" classname="ParqueaderoTest" time="0.002"/>
+  <testcase name="testDarPlacaCarroNoExiste" classname="ParqueaderoTest" time="0.002"/>
+  <testcase name="testTiempoPromedioSinCarros" classname="ParqueaderoTest" time="0.003"/>
+  <testcase name="testEntrarCarroParqueaderoLleno" classname="ParqueaderoTest" time="0.004"/>
+  <testcase name="testCalcularPuestosLibresVacio" classname="ParqueaderoTest" time="0.003"/>
+  <testcase name="testHayCarroMas24HorasFalse" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testContarCarrosPBConCarros" classname="ParqueaderoTest" time="0.001"/>
+  <testcase name="testConstructor" classname="ParqueaderoTest" time="0.001"/>
+</testsuite>

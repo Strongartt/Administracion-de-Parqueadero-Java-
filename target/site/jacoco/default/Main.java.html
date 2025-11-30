@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">parqueadero</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">import java.awt.event.PaintEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+<span class="nc" id="L6">public class Main {</span>
+    public static void main(String[] args) {
+<span class="nc" id="L8">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L9">        Parqueadero parqueadero = new Parqueadero();  //parqueadero abierto</span>
+        // Crear una lista para almacenar los carros registrados
+        String placa;
+        double ingresos;
+
+
+        //Menu de opciones
+        int opcion;
+        do {
+<span class="nc" id="L18">            System.out.println(&quot;----- Bienvenido al Parqueadero -----&quot;);</span>
+<span class="nc" id="L19">            System.out.println(&quot;1. Registrar un carro&quot;);</span>
+<span class="nc" id="L20">            System.out.println(&quot;2. Sacar un carro&quot;);</span>
+<span class="nc" id="L21">            System.out.println(&quot;3. Ingresos totales del parqueadero&quot;);</span>
+<span class="nc" id="L22">            System.out.println(&quot;4. Consultar puestos disponibles&quot;);</span>
+<span class="nc" id="L23">            System.out.println(&quot;5. Avanzar el reloj del parqueadero&quot;);</span>
+<span class="nc" id="L24">            System.out.println(&quot;6. Cambiar tarifa&quot;);</span>
+<span class="nc" id="L25">            System.out.println(&quot;7. Salir \n&quot;);</span>
+<span class="nc" id="L26">            System.out.println(&quot;METODOS ADICIONALES&quot;);</span>
+<span class="nc" id="L27">            System.out.println(&quot;8. Tiempo promedio &quot;);</span>
+<span class="nc" id="L28">            System.out.println(&quot;9. Hay carro mas de 8 horas? (objeto)&quot;);</span>
+<span class="nc" id="L29">            System.out.println(&quot;10. Hay carro mas de 8 horas? (boolean)&quot;);</span>
+<span class="nc" id="L30">            System.out.println(&quot;11. Lista de carros parqueados mas de 3 horas&quot;);</span>
+<span class="nc" id="L31">            System.out.println(&quot;12. Placas iguales?&quot;);</span>
+<span class="nc" id="L32">            System.out.println(&quot;13. Carros con PB&quot;);</span>
+<span class="nc" id="L33">            System.out.println(&quot;14. Metodo 1&quot;);</span>
+<span class="nc" id="L34">            System.out.println(&quot;15. Desocupar parqueadero&quot;);</span>
+<span class="nc" id="L35">            System.out.println(&quot;16. Metodo 2&quot;);</span>
+<span class="nc" id="L36">            System.out.print(&quot;Seleccione una opción: &quot;);</span>
+
+
+<span class="nc" id="L39">            opcion = Integer.parseInt(sc.next());</span>
+
+<span class="nc bnc" id="L41" title="All 17 branches missed.">            switch (opcion) {</span>
+                case 1:
+<span class="nc" id="L43">                    System.out.println(&quot;Placa del carro a registrar: &quot;);</span>
+<span class="nc" id="L44">                    placa = sc.next();</span>
+<span class="nc" id="L45">                    parqueadero.entrarCarro(placa);</span>
+<span class="nc" id="L46">                    break;</span>
+                case 2:
+<span class="nc" id="L48">                    System.out.println(&quot;Placa del carro a retirar&quot;);</span>
+<span class="nc" id="L49">                    placa = sc.next();</span>
+<span class="nc" id="L50">                    parqueadero.sacarCarro(placa);</span>
+<span class="nc" id="L51">                    break;</span>
+                case 3:
+<span class="nc" id="L53">                    System.out.println(&quot;El total de ingresos es $ &quot; + parqueadero.darMontoCaja());</span>
+<span class="nc" id="L54">                    break;</span>
+                case 4:
+<span class="nc" id="L56">                    System.out.println(&quot;Hay &quot; + parqueadero.calcularPuestosLibres() + &quot; puestos libres&quot;);</span>
+<span class="nc" id="L57">                    System.out.println(&quot;--------------------------------&quot;);</span>
+<span class="nc" id="L58">                    System.out.println(&quot;HORA ACTUAL =&gt; &quot; + parqueadero.darHoraActual());</span>
+<span class="nc" id="L59">                    parqueadero.visualizarCarrosParqueados();</span>
+<span class="nc" id="L60">                    break;</span>
+                case 5:
+<span class="nc" id="L62">                    parqueadero.avanzarHora();</span>
+<span class="nc" id="L63">                    break;</span>
+                case 6:
+<span class="nc" id="L65">                    System.out.println(&quot;Escriba el valor de la nueva tarifa: &quot;);</span>
+<span class="nc" id="L66">                    int tarifaNueva = sc.nextInt();</span>
+<span class="nc" id="L67">                    parqueadero.cambiarTarifa(tarifaNueva);</span>
+<span class="nc" id="L68">                    break;</span>
+                case 7:
+<span class="nc" id="L70">                    System.exit(0);</span>
+                case 8:
+<span class="nc" id="L72">                    System.out.println(&quot;El tiempo promedio de cada carro es de: &quot; + parqueadero.calcularTiempoPromedioParqueado());</span>
+<span class="nc" id="L73">                    break;</span>
+                case 9:
+<span class="nc" id="L75">                    System.out.println(&quot;El carro con mayor permanencia (mas de 8 horas) es el de placa: &quot; + parqueadero.hayCarroMasDeOchoHoras().darPlaca());</span>
+<span class="nc" id="L76">                    break;</span>
+                case 10:
+<span class="nc" id="L78">                    System.out.println(&quot;Hay carro mas de 8 horas: &quot; + parqueadero.hayUnCarroMasDeOchoHoras());</span>
+<span class="nc" id="L79">                    break;</span>
+                case 11:
+<span class="nc" id="L81">                    System.out.println(&quot;CARROS MAS DE 3 HORAS&quot;);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                    for (int i = 0; i &lt; parqueadero.darCarrosMasDeTresHorasParqueados().size(); i++) {</span>
+<span class="nc" id="L83">                        System.out.println(parqueadero.darCarrosMasDeTresHorasParqueados().get(i).darPlaca());</span>
+                    }
+<span class="nc" id="L85">                    break;</span>
+                case 12:
+<span class="nc" id="L87">                    System.out.println(&quot;Placas repetidas: &quot;+parqueadero.hayCarrosPlacaIgual());</span>
+<span class="nc" id="L88">                    break;</span>
+                case 13:
+<span class="nc" id="L90">                    System.out.println(&quot;Carros con placa PB: &quot;+parqueadero.contarCarrosQueComienzanConPlacaPB());</span>
+<span class="nc" id="L91">                    break;</span>
+                case 14:
+<span class="nc" id="L93">                    System.out.println(parqueadero.metodo1());</span>
+<span class="nc" id="L94">                    break;</span>
+                case 15:
+<span class="nc" id="L96">                    parqueadero.desocuparParqueadero();</span>
+<span class="nc" id="L97">                    break;</span>
+                case 16:
+<span class="nc" id="L99">                    System.out.println(parqueadero.metodo2());</span>
+                    break;
+            }
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        }while (opcion != 7) ;</span>
+<span class="nc" id="L103">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Puesto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">parqueadero</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Puesto.java</span></div><h1>Puesto.java</h1><pre class="source lang-java linenums">/**
+ * Esta clase representa un puesto en el parqueadero.
+ */
+public class Puesto {
+// -----------------------------------------------------------------
+    // Atributos
+    // -----------------------------------------------------------------
+
+    /**
+     * Eventual carro en el puesto. Si no hay ninguno, carro == null.
+     */
+    private Carro carro;
+
+    /**
+     * N�mero del puesto dentro del parqueadero.
+     */
+    private int numeroPuesto;
+
+    // -----------------------------------------------------------------
+    // Constructores
+    // -----------------------------------------------------------------
+
+    /**
+     * Crea un puesto vac�o. &lt;br&gt;
+     * &lt;b&gt;post: &lt;/b&gt; Se cre� un puesto vac�o.
+     * @param pPuesto N�mero de puesto.
+     */
+    public Puesto( int pPuesto )
+<span class="fc" id="L29">    {</span>
+<span class="fc" id="L30">        carro = null;</span>
+<span class="fc" id="L31">        numeroPuesto = pPuesto;</span>
+<span class="fc" id="L32">    }</span>
+
+    // -----------------------------------------------------------------
+    // M�todos
+    // -----------------------------------------------------------------
+
+    /**
+     * Retorna el carro del puesto. Si no hay ning�n carro retorna null.
+     * @return El carro que ocupa el puesto.
+     */
+    public Carro darCarro( )
+    {
+<span class="fc" id="L44">        return carro;</span>
+    }
+
+    /**
+     * Indica si el puesto est� ocupado.
+     * @return Retorna true si el puesto est� ocupado. Retorna false en caso contrario.
+     */
+    public boolean estaOcupado( )
+    {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        boolean ocupado = carro != null;</span>
+<span class="fc" id="L54">        return ocupado;</span>
+    }
+
+    /**
+     * Parquea un carro en el puesto. &lt;br&gt;
+     * &lt;b&gt;pre: &lt;/b&gt; El puesto esta vacio. &lt;br&gt;
+     * &lt;b&gt;post: &lt;/b&gt; El puesto ahora esta ocupado por el carro pCarro.
+     * @param pCarro Carro que se esta parqueando. pCarro != null.
+     */
+    public void parquearCarro( Carro pCarro )
+    {
+<span class="fc" id="L65">        carro = pCarro;</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * Saca el carro del puesto. &lt;br&gt;
+     * &lt;b&gt;post: &lt;/b&gt; El puesto est� vac�o.
+     */
+    public void sacarCarro( )
+    {
+<span class="fc" id="L74">        carro = null;</span>
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Retorna el n�mero del puesto.
+     * @return El n�mero asignado al puesto.
+     */
+    public int darNumeroPuesto( )
+    {
+<span class="fc" id="L83">        return numeroPuesto;</span>
+    }
+
+    /**
+     * Indica si el carro tiene la placa recibida.
+     * @param pPlaca Placa del carro que ocupa el puesto.
+     * @return Retorna true si tiene la placa, false en caso contrario.
+     */
+    public boolean tieneCarroConPlaca( String pPlaca )
+    {
+<span class="fc" id="L93">        boolean tieneCarro = true;</span>
+
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        if( carro == null )</span>
+        {
+<span class="fc" id="L97">            tieneCarro = false;</span>
+        }
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        else if( carro.tienePlaca( pPlaca ) )</span>
+        {
+<span class="fc" id="L101">            tieneCarro = true;</span>
+        }
+        else
+        {
+<span class="fc" id="L105">            tieneCarro = false;</span>
+        }
+
+<span class="fc" id="L108">        return tieneCarro;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
