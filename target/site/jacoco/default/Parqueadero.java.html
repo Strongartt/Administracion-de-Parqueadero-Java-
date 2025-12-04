@@ -145,9 +145,9 @@ public class Parqueadero {
         {
             // Buscar en el parqueadero un carro con la placa indicada
 <span class="fc" id="L147">            int numPuestoCarro = buscarPuestoCarro(pPlaca.toUpperCase( ));</span>
-<span class="fc bfc" id="L148" title="All 2 branches covered.">            if(numPuestoCarro != CARRO_NO_EXISTE)</span>
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">            if(numPuestoCarro != CARRO_NO_EXISTE)</span>
             {
-<span class="fc" id="L150">                resultado = CARRO_YA_EXISTE;</span>
+<span class="nc" id="L150">                resultado = CARRO_YA_EXISTE;</span>
             }
             // Buscar un puesto libre para el carro y agregarlo
 <span class="fc" id="L153">            resultado = buscarPuestoLibre( ); //encuentra posicion vacia</span>
